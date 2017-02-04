@@ -14,6 +14,7 @@ load_rc_config $name
 : ${pm2_user="%USER%"}
 
 command="%PM2_PATH%"
+command_interpreter="%NODE_PATH%"
 pidfile="/home/${pm2_user}/.pm2/${name}.pid"
 start_cmd="${name}_start"
 stop_cmd="${name}_stop"
@@ -53,7 +54,7 @@ pm2_status() {
 }
 
 pm2_running() {
-        process_id=$(pgrep -F ${pidfile})
+        process_id=$(check_pidfile ${pidfile} ${command} ${command_interpreter})
         if [ "${process_id}" -gt 0 ]; then
                 return 0
         else
