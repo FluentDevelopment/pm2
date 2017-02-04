@@ -12,10 +12,11 @@ rcvar=${name}_enable
 load_rc_config $name
 
 : ${pm2_user="%USER%"}
+: ${pm2_home="%HOME_PATH%"}
 
 command="%PM2_PATH%"
 command_interpreter="%NODE_PATH%"
-pidfile="/home/${pm2_user}/.pm2/${name}.pid"
+pidfile="${pm2_home}/${name}.pid"
 start_cmd="${name}_start"
 stop_cmd="${name}_stop"
 reload_cmd="${name}_reload"
